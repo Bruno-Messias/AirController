@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+embedded/AirController/.vs/AirController/v14/.atsuo
+*.atsln
+*.cppproj
+*.xml
