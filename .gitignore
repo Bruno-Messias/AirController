@@ -34,3 +34,5 @@ embedded/AirController/.vs/AirController/v14/.atsuo
 *.atsln
 *.cppproj
 *.xml
+computer/src/DataLog.h
+computer/.vscode/settings.json

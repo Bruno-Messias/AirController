@@ -12,9 +12,6 @@ class DataLog {
 public:
     bool flag;
 
-    DataLog() {}
-    ~DataLog() {}
-
     int setInit();
     int readLog();
     void conversionLog(string read_log);
@@ -23,5 +20,4 @@ public:
     void displayMenu();
     void interruptFunction();
     void totalTime();
-    void mostUsedDay();
 };

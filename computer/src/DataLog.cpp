@@ -258,19 +258,12 @@ void DataLog::totalTime()
     cout << "Total Time used: "  << lista.displayTotalTime() << endl;
 }
 
-void DataLog::mostUsedDay()
-{
-    cout << "Most Used day is: "<< endl;
-    lista.mostUsedDay();
-}
-
 void DataLog::displayMenu()
 {
     cout << endl;
     cout << "------------ Welcome to the Datalog System --------------------" << endl;
     cout << "Press 1 to list the logs" << endl;
     cout << "Press 2 to the total time the system turned on" << endl;
-    cout << "Press 3 to the most used day" << endl;
     cout << "Press 4 to exit the program" << endl;
     cout << "---------------------------------------------------------------" << endl;
     cout << endl;
@@ -293,9 +286,6 @@ void DataLog::interruptFunction()
                 break;
             case 50:
                 DataLog::totalTime();   //Return the total time that the system is on
-                break;
-            case 51:
-                DataLog::mostUsedDay(); //Return the most used day
                 break;
             case 52:
                 close(serial_port);
