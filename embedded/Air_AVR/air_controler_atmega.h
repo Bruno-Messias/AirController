@@ -13,7 +13,6 @@ class AirControllerAtmega : public AirController
 {
 	List data;
 	ClockCalendar cc;
-	
 	int value, counter;
 	
 	public:

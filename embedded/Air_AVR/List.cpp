@@ -1,7 +1,7 @@
 ﻿
 #include "List.h"
 
-/*------------------- Implementation of operator new and delete to avr-gcc ----------------*/
+/*------------------- Implementation of operator new and delete to AVR-GCC ----------------*/
 using std::new_handler;
 extern "C" void *malloc (std::size_t);
 extern "C" void free(void *);
@@ -46,11 +46,6 @@ operator delete[] (void *ptr) throw ()
 {
 	::operator delete (ptr);
 
-}
-
-void __cxa_pure_virtual()
-{
-	abort();
 }
 /*----------------------------------------------------------------------------------*/
 

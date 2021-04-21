@@ -34,3 +34,14 @@ embedded/AirController/.vs/AirController/v14/.atsuo
 *.atsln
 *.cppproj
 *.xml
+*.eep
+*.eep
+*.elf
+*.hex
+*.lss
+*.map
+*.srec
+embedded/AirController/AirController/Debug/AirController.srec
+embedded/Air_AVR/.vs/Air_AVR/v14/.atsuo
+*.mk
+embedded/Air_AVR/Debug/Makefile

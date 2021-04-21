@@ -100,7 +100,6 @@ void AirControllerAtmega::createLog(char* event)
 	{
 		itoa(min_aux,min_s,10);
 	}
-	//
 	sec_aux = cc.getSegundo();
 	
 	if (sec_aux <= 9)
@@ -138,7 +137,6 @@ void AirControllerAtmega::sendLog() //Send LOG via UART
 {
 	USART_putstring(data.removeFirst());
 }
-
 
 
 

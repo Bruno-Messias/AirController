@@ -1,6 +1,4 @@
 
-#include <string.h>
-
 class Node {
 	char *val;
 	Node* next;

@@ -6,10 +6,7 @@
 class AirController
 {
 	int estate;
-	
-	protected:
-		bool init, stop;
-	
+		
 	public:
 		AirController();
 		void FSM();
@@ -17,6 +14,8 @@ class AirController
 		virtual void createLog(char*) = 0;
 		virtual void sendLog() = 0;
 		
+	protected:
+		bool init, stop;
 };
 
 #endif // !AIR_CONTROLER_H

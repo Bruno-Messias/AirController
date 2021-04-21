@@ -1,8 +1,6 @@
 ﻿
 #include "USART.h"
 
-#include <stdio.h>
-
 /* Initialize USART */
 void USART0_Init(unsigned int ubrr_val)
 {

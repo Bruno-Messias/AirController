@@ -1,5 +1,9 @@
 ﻿#include "air_controler.h"
 
+//-------------------------------------------------------
+extern "C" void __cxa_pure_virtual() { while (1); } //Exception handler function that C++ needs when compiling classes with virtual functions not defined in GCC-AVR
+//-------------------------------------------------------
+
 AirController::AirController()
 {
 	estate = 0;		//Control the actual estate

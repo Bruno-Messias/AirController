@@ -2,7 +2,7 @@
 #include "Node.cpp"
 
 
-/*------------------- Adding operator new and delete to avr-gcc ----------------*/
+/*------------------- Adding operator new and delete to AVR-GCC ----------------*/
 extern "C++" {
 	namespace std
 	{
