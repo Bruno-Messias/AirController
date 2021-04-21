@@ -45,3 +45,5 @@ embedded/AirController/AirController/Debug/AirController.srec
 embedded/Air_AVR/.vs/Air_AVR/v14/.atsuo
 *.mk
 embedded/Air_AVR/Debug/Makefile
+computer/src/DataLog.h
+computer/.vscode/settings.json
