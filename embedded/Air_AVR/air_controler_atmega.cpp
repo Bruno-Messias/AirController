@@ -19,16 +19,15 @@ void AirControllerAtmega::checkLog() //Check for Event to store a log
 		event[0] = '/';
 		event[1] = 'a';
 		event[2] = '\0';
-		
+		AirControllerAtmega::createLog(event);
 	}
 	else if(init)				//Check for initialization of system
 	{
 		event[0] = '/';
 		event[1] = 'b';
 		event[2] = '\0';
+		AirControllerAtmega::createLog(event);
 	}
-	
-	AirControllerAtmega::createLog(event);
 }
 
 void AirControllerAtmega::createLog(char* event)
@@ -36,14 +35,10 @@ void AirControllerAtmega::createLog(char* event)
 	char log[] = "1/";
 	char ano_s[5], mes_s[3], dia_s[3], hora_s[3], min_s[3], sec_s[3];
 	char doublepoints[] = ":";
-	char slash[] = "/";
-	char null[] = "0";
 	
 	char mes_c,dia_c,hora_c,min_c,sec_c;
 	
 	int mes_aux, dia_aux, hora_aux, min_aux, sec_aux = 0;
-	
-	//TODO: add a better function to concatenate information
 	
 	/* -- Getting ClockCalendar Information -- */
 	itoa(cc.getAno(), ano_s, 10);
@@ -126,16 +121,17 @@ void AirControllerAtmega::createLog(char* event)
 	strcat(log, min_s);
 	strcat(log, doublepoints);
 	strcat(log, sec_s);
-	strcat(log,slash);
 	strcat(log, event);
-	strcat(log,null);
 	
 	data.insertAfterLast(log); //Store the log in the data structure
 }
 
 void AirControllerAtmega::sendLog() //Send LOG via UART
 {
-	USART_putstring(data.removeFirst());
+	if(data.head != 0)
+	{
+		USART_putstring(data.removeFirst());
+	}
 }
 
 

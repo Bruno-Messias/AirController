@@ -10,6 +10,8 @@ class AirController
 	public:
 		AirController();
 		void FSM();
+		bool getInit();
+		bool getStop();
 		virtual void checkLog() = 0;
 		virtual void createLog(char*) = 0;
 		virtual void sendLog() = 0;

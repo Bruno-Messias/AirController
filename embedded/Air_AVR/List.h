@@ -27,8 +27,10 @@ extern "C++" {
 /*-------------------------------------------------------------------------------*/
 
 class List {
-	Node* head;
+	
 	public:
+	Node* head;
+	
 	List();
 	~List();
 	void insertAfterLast(char* dat);

@@ -23,6 +23,8 @@ AirController::AirController()
 
 void AirController::FSM() //Logic for next estate
 {
+	bool control = false;
+	
 	switch (estate)
 	{
 	case 0: //INIT
@@ -38,8 +40,9 @@ void AirController::FSM() //Logic for next estate
 		rst_bit(PORTB, system_bit);
 
 		//Next Estate:
-		if (test_bit(PINB, aberture_bit))
+		while(!test_bit(PINB, aberture_bit))
 		{
+<<<<<<< Updated upstream
 			estate = 1;
 			break;
 		}
@@ -48,6 +51,12 @@ void AirController::FSM() //Logic for next estate
 			estate = 2;
 			break;
 		}
+=======
+			
+		}
+		estate = 2;
+		break;
+>>>>>>> Stashed changes
 
 	case 2: //Standby
 	
@@ -55,6 +64,7 @@ void AirController::FSM() //Logic for next estate
 	rst_bit(PORTB, led_bit);
 	
 	//Next Estate:
+<<<<<<< Updated upstream
 	if (test_bit(PINB, button_bit))
 	{
 		estate = 3;
@@ -62,15 +72,35 @@ void AirController::FSM() //Logic for next estate
 		break;
 	}
 	else if (test_bit(PINB, aberture_bit))
+=======
+	while (test_bit(PINB, aberture_bit))
 	{
-		estate = 1;
+		if (test_bit(PINB, button_bit))
+		{
+			control = true;
+			break;
+		}
+	}
+
+	if(control)
+>>>>>>> Stashed changes
+	{
+		init = true;
+		estate = 3;
 		break;
 	}
+<<<<<<< Updated upstream
 	else
 	{
 		estate = 2;
 		break;
 	}
+=======
+	
+	estate = 1;
+	break;
+	
+>>>>>>> Stashed changes
 
 	case 3: //ON
 	
@@ -80,6 +110,7 @@ void AirController::FSM() //Logic for next estate
 	set_bit(PORTB, system_bit);	
 	
 	//Next Estate:
+<<<<<<< Updated upstream
 	if(test_bit(PINB, aberture_bit))
 	{
 		estate = 1;
@@ -91,9 +122,29 @@ void AirController::FSM() //Logic for next estate
 		estate = 3;
 		break;
 	}
+=======
+	
+	while(test_bit(PINB,aberture_bit))
+	{
+		
+	}
+	stop = true;
+	estate = 1;
+	break;
+>>>>>>> Stashed changes
 
 	default:
 		estate = 0;
 		break;
 	}
+}
+
+bool AirController::getInit()
+{
+	return init;
+}
+
+bool AirController::getStop()
+{
+	return stop;
 }

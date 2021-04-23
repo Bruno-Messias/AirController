@@ -15,7 +15,8 @@ int main(void)
 	{
 		Controler.FSM(); //Control and change for the next estate
 		Controler.checkLog(); //Check of event for create log
-		Controler.sendLog(); //Send the log via UART Interrupt based
+		Controler.sendLog(); //Send the log via UART Interrupt based	
+		
 	}
 	
 	return 0;
