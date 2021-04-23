@@ -5,8 +5,8 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-//#define F_CPU 1000000 // frequency oscillator for Simulation
-#define F_CPU 16000000
+#define F_CPU 1000000 // frequency oscillator for Simulation
+//#define F_CPU 16000000
 
 #include <util/delay.h>
 
@@ -16,9 +16,9 @@
 #define test_bit(reg,bit)	(reg & (1<<bit)) // test a bit
 
 /*-- Defining IO pins --*/
-#define system_bit PORTB0		//Arduino: D8
+#define button_bit PORTB0		//Arduino: D8
 #define led_bit PORTB1			//Arduino: D9
 #define aberture_bit PORTB2		//Arduino: D10(SS)
-#define button_bit PORTB3		//Arduino: D11(MOSI)
+#define system_bit PORTB3		//Arduino: D11(MOSI)
 
-#endif //PINS_H
+#endif //PINS_H 

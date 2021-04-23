@@ -40,14 +40,10 @@ void AirController::FSM() //Logic for next estate
 		//Next Estate:
 		if (test_bit(PINB, aberture_bit))
 		{
-			estate = 1;
-			break;
-		}
-		else
-		{
 			estate = 2;
 			break;
 		}
+		break;
 
 	case 2: //Standby
 	
@@ -55,20 +51,19 @@ void AirController::FSM() //Logic for next estate
 	rst_bit(PORTB, led_bit);
 	
 	//Next Estate:
-	if (test_bit(PINB, button_bit))
+	if (test_bit(PINB, aberture_bit))
 	{
-		estate = 3;
-		init = true;
+		if (test_bit(PINB, button_bit))
+		{
+			estate = 3;
+			break;
+		}
 		break;
 	}
-	else if (test_bit(PINB, aberture_bit))
+
+	if(!test_bit(PINB,aberture_bit))
 	{
 		estate = 1;
-		break;
-	}
-	else
-	{
-		estate = 2;
 		break;
 	}
 
@@ -80,17 +75,10 @@ void AirController::FSM() //Logic for next estate
 	set_bit(PORTB, system_bit);	
 	
 	//Next Estate:
-	if(test_bit(PINB, aberture_bit))
-	{
-		estate = 1;
-		stop = true;
-		break;
-	}
-	else
-	{
-		estate = 3;
-		break;
-	}
+	
+	while(test_bit(PINB,aberture_bit)){}
+	estate = 1;
+	break;
 
 	default:
 		estate = 0;
