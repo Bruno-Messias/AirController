@@ -74,36 +74,23 @@ float List::displayTotalTime()
 	float last_hour = 0;
 	float total_hour = 0;
 
-	while (aux != 0){
-		if (aux->getEvent() == 'a')
+	while (aux != 0)
+	{
+		if ((aux->getEvent()) == 'b')
 		{
-			hour = aux->getHour();
-			hour += (aux->getMin())/60;
-			hour += (aux->getSec())/3600;
+			hour = (aux->getHour())*3600 + (aux->getMin())*60 + (aux->getSec());
+			aux = aux->getNext();
 
-			while (aux->getEvent() != 'b')
+			if(aux != 0)
 			{
-				aux = aux->getNext();
+				last_hour = (aux->getHour())*3600 + (aux->getMin())*60 + (aux->getSec());
 			}
-
-			last_hour = aux->getHour();
-			last_hour += (aux->getMin())/60;
-			last_hour += (aux->getSec())/3600;
-			
-			total_hour += hour - last_hour;
+			else
+				last_hour = 0;	
 		}
-
+		total_hour += last_hour - hour;
 		aux = aux->getNext();
 	}
 
 	return total_hour;
-}
-
-void List::listAll() 
-{
-  Node* aux = head;
-  while (aux != 0){
-     List::printLog(aux);
-     aux = aux->getNext();
-  }
 }

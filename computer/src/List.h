@@ -12,5 +12,4 @@ public:
     void listLogs(int max_day, int min_day);
     void printLog(Node *aux);
     float displayTotalTime();
-    void listAll();
 };
