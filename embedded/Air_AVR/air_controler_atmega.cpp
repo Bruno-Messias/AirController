@@ -125,9 +125,12 @@ void AirControllerAtmega::createLog(char* event)
 
 void AirControllerAtmega::sendLog() //Send LOG via UART
 {
-	if(data.head != 0)
+	if(test_bit(PIND,PORTD0))
 	{
-		USART_putstring(data.removeFirst());
+		while(data.head != 0)
+		{
+			USART_putstring(data.removeFirst());
+		}
 	}
 }
 
