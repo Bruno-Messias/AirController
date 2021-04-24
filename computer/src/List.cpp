@@ -37,16 +37,22 @@ void List::insertAfterLast(int newYear, int newMonth, int newDay, int newHour, i
 void List::listLogs(int max_day, int min_day, int year, int month)
 {
 	Node* aux = head;
-	int check;
+	int check_day;
 
   	while (aux != 0)
 	{
-		check = aux->getDay();
-		if (check <= max_day && check >= min_day)
+		if (aux->getYear() == year)
 		{
-			List::printLog(aux);
+			if(aux->getMonth() == month)
+			{
+				check_day = aux->getDay();
+				if (check_day <= max_day && check_day >= min_day)
+				{
+					List::printLog(aux);
+				}
+				aux = aux->getNext();
+			}
 		}
-     	aux = aux->getNext();
   	}
 }
 
