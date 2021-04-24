@@ -5,14 +5,12 @@
 #include <stdlib.h>
 
 #include "air_controler.cpp"
-#include "ClockCalendar.h"
 #include "List.cpp"
 #include "USART.cpp"
 
 class AirControllerAtmega : public AirController
 {
 	List data;
-	ClockCalendar cc;
 	int value, counter;
 	
 	public:

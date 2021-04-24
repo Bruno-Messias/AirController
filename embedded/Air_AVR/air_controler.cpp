@@ -19,11 +19,17 @@ AirController::AirController()
 	// -- Initiate Out bits --
 	rst_bit(PORTB, system_bit);
 	rst_bit(PORTB, led_bit);
+	
+	//-- Disable Interrupts --
+	rst_bit(PCMSK0, PCINT0);				//Disable interrupt of reset_bit
+	rst_bit(PCICR, PCIE0);					// Disable Interrupt
+	
+	//Set ClockCalendar for 1/4/2021 00:00:00
+	cc.setCalendar(2021,4,1,0,0,5);
 }
 
 void AirController::FSM() //Logic for next estate
 {
-	bool control = false;
 	
 	switch (estate)
 	{
@@ -42,37 +48,41 @@ void AirController::FSM() //Logic for next estate
 		//Next Estate:
 		while(!test_bit(PINB, aberture_bit))
 		{
-			
+			_delay_ms(1000);
+			cc.advance();
 		}
 		estate = 2;
 		break;
 
 	case 2: //Standby
 	
-	/* Setting estate output */
-	rst_bit(PORTB, led_bit);
+		/* Setting estate output */
+		rst_bit(PORTB, led_bit);
 	
-	//Next Estate:
-	while (test_bit(PINB, aberture_bit))
-	{
-		if (test_bit(PINB, button_bit))
+		//Next Estate:
+		while (test_bit(PINB, aberture_bit))
 		{
-			control = true;
-			break;
+			//-- Setting the interrupt
+			set_bit(PCMSK0, PCINT0);		//Enable interrupt of button_bit
+			set_bit(PCICR, PCIE0);			// Need to enable for interrupt
+		
+			sei();							//Initiate check service routine
+			
+			_delay_ms(1000);
+			cc.advance();
+		
+			if(flag)						//Adding flag to stop Timer
+			{
+				init = true;
+				break;
+			}
 		}
-	}
-
-	if(control)
-	{
-		init = true;
-		estate = 3;
+		//-- Disable Interrupts --
+		rst_bit(PCMSK0, PCINT0);				//Disable interrupt of reset_bit
+		rst_bit(PCICR, PCIE0);					// Disable Interrupt
+		estate = 1;
 		break;
-	}
 	
-	estate = 1;
-	break;
-	
-
 	case 3: //ON
 	
 	init = false;
@@ -81,10 +91,10 @@ void AirController::FSM() //Logic for next estate
 	set_bit(PORTB, system_bit);	
 	
 	//Next Estate:
-	
 	while(test_bit(PINB,aberture_bit))
 	{
-		
+		_delay_ms(1000);
+		cc.advance();
 	}
 	stop = true;
 	estate = 1;
@@ -96,12 +106,7 @@ void AirController::FSM() //Logic for next estate
 	}
 }
 
-bool AirController::getInit()
+ISR(PCINT0_vect) //Interrupt Service Routine of reset button(PORTB0)
 {
-	return init;
-}
-
-bool AirController::getStop()
-{
-	return stop;
+	flag = true;
 }

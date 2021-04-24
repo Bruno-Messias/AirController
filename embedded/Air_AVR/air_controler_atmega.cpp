@@ -1,10 +1,7 @@
 ﻿#include "air_controler_atmega.h"
 
 AirControllerAtmega::AirControllerAtmega()
-{
-	//Set ClockCalendar for 1/4/2021 00:00:00
-	cc.setCalendar(2021,4,1,0,0,5);			
-	
+{	
 	/* -- Initiate USART with 9600 BaudRate --*/
 	USART0_Init(MYUBBR);
 	sei();

@@ -2,21 +2,21 @@
 #define AIR_CONTROLER_H
 
 #include "pins_atmega328p.h"
+#include "ClockCalendar.h"
 
 class AirController
 {
-	int estate;
-		
 	public:
+		int estate;
+		
 		AirController();
 		void FSM();
-		bool getInit();
-		bool getStop();
 		virtual void checkLog() = 0;
 		virtual void createLog(char*) = 0;
 		virtual void sendLog() = 0;
 		
 	protected:
+		ClockCalendar cc;
 		bool init, stop;
 };
 
