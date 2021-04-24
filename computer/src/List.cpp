@@ -34,16 +34,7 @@ void List::insertAfterLast(int newYear, int newMonth, int newDay, int newHour, i
 	}
 }
 
-void List::removeFirst() 
-{
-	if (head != 0) {
-		Node* oldHead = head;
-		head = head->getNext();
-		delete oldHead;
-	}
-}
-
-void List::listLogs(int max_day, int min_day)
+void List::listLogs(int max_day, int min_day, int year, int month)
 {
 	Node* aux = head;
 	int check;
@@ -66,13 +57,13 @@ void List::printLog(Node* aux)
 	<< " Event: " << aux->getEvent() << endl;
 }
 
-float List::displayTotalTime() 
+void List::displayTotalTime() 
 {
   	Node* aux = head;
 
-	float hour = 0;
-	float last_hour = 0;
-	float total_hour = 0;
+	int hour = 0;
+	int last_hour = 0;
+	int total_hour = 0;
 
 	while (aux != 0)
 	{
@@ -92,5 +83,8 @@ float List::displayTotalTime()
 		aux = aux->getNext();
 	}
 
-	return total_hour;
+	int printHour = total_hour/3600;
+	int printMinute = (total_hour % 3600)/60;
+
+	cout << "Tempo toral de uso: " << printHour << " horas e " << printMinute << " minutos" << endl; 
 }

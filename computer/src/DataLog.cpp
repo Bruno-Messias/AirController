@@ -266,18 +266,22 @@ void DataLog::addLog(int id, string year_s, string month_s, string day_s, string
 
 void DataLog::listEvents()
 {
-    int min_day, max_day;
+    int min_day, max_day, year, month;
+    cout << "Select the Year: "<< endl;
+    cin >> year;
+    cout << "Select the Month: "<< endl;
+    cin >> month;
     cout << "Select the Minimun day: " << endl;
     cin >> min_day;
     cout << "Select the Maximun day: " << endl;
     cin >> max_day;
     
-    lista.listLogs(max_day, min_day);
+    lista.listLogs(max_day, min_day, year, month);
 }
 
 void DataLog::totalTime()
 {
-    cout << "Total Time used: "  << lista.displayTotalTime() << endl;
+    lista.displayTotalTime();
 }
 
 void DataLog::displayMenu()
