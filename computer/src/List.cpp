@@ -51,7 +51,7 @@ void List::listLogs(int max_day, int min_day)
   	while (aux != 0)
 	{
 		check = aux->getDay();
-		if (check < max_day && check > min_day)
+		if (check <= max_day && check >= min_day)
 		{
 			List::printLog(aux);
 		}
@@ -97,4 +97,13 @@ float List::displayTotalTime()
 	}
 
 	return total_hour;
+}
+
+void List::listAll() 
+{
+  Node* aux = head;
+  while (aux != 0){
+     List::printLog(aux);
+     aux = aux->getNext();
+  }
 }

@@ -5,6 +5,10 @@ int DataLog::setInit()
     // Open the serial port
     serial_port = open("/dev/ttyACM0", O_RDWR);
 
+    /* Setting timeout to 1 sec*/
+    timeout.tv_sec = 2;
+    timeout.tv_usec = 0;
+
     // Create new termios struc for termios handle
     struct termios tty;
 
@@ -22,7 +26,7 @@ int DataLog::setInit()
     tty.c_cflag &= ~CRTSCTS; // Disable RTS/CTS hardware flow control 
     tty.c_cflag |= CREAD | CLOCAL; // Turn on READ & ignore ctrl lines (CLOCAL = 1)
 
-    tty.c_lflag &= ~ICANON;
+    tty.c_lflag &= ~ICANON; // Set non-canonical mode
     tty.c_lflag &= ~ECHO; // Disable echo
     tty.c_lflag &= ~ECHOE; // Disable erasure
     tty.c_lflag &= ~ECHONL; // Disable new-line echo
@@ -52,23 +56,41 @@ int DataLog::setInit()
 int DataLog::readLog() 
 {
     char read_buf[24];
+    int rv;
+    int num_bytes = 0;
+
+    fd_set read_fds, write_fds, except_fds;
+    FD_ZERO(&read_fds);
+    FD_ZERO(&write_fds);
+    FD_ZERO(&except_fds);
+    FD_SET(serial_port, &read_fds);
 
     memset(&read_buf, '\0', sizeof(read_buf));      //Allocating memory for the buffer receiver
 
-    //Getting number of bytes received to check if is something to read
-    int num_bytes = read(serial_port, &read_buf, sizeof(read_buf));
+    rv = select(serial_port + 1, &read_fds, &write_fds, &except_fds, &timeout);  //Initialize control time
 
-    if (num_bytes < 0)                              //Check For error in receiver
+    if(rv ==-1)
     {
-        cout << "Error reading: " << strerror(errno) << endl;;
-        return 1;
+        cout << "Error reading: select() " << endl;
+        return -1;
     }
 
-     if(num_bytes > 0)                              //Check If is something tho read
-     {
-        log = read_buf;
-        DataLog::conversionLog(log);
-     }
+    if (rv == 1)
+    {
+        //Reading File
+        num_bytes = read(serial_port, &read_buf, sizeof(read_buf));
+
+        if (num_bytes < 0)                              //Check For error in receiver
+        {
+            cout << "Error reading: " << strerror(errno) << endl;
+        }
+
+        if(num_bytes > 0)                              //Check If is something tho read
+        {
+            log = read_buf;
+            DataLog::conversionLog(log);
+        }
+    }
 
     return 0;
 }
@@ -287,7 +309,7 @@ void DataLog::interruptFunction()
             case 50:
                 DataLog::totalTime();   //Return the total time that the system is on
                 break;
-            case 52:
+            case 52: 
                 close(serial_port);
                 exit(0);
             default:

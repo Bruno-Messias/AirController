@@ -19,7 +19,7 @@ int main()
         {
             host.readLog();             //Read Logs form Serial Port
             host.interruptFunction();   //Interrupt Functions to select funcion menu
-            
+
             //Check if the keyboar is pressed
             if (host.flag)          
             {
@@ -28,6 +28,6 @@ int main()
             }
         }
     }
-
+    
     return 0;
 }
