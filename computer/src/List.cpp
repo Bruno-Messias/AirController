@@ -34,28 +34,25 @@ void List::insertAfterLast(int newYear, int newMonth, int newDay, int newHour, i
 	}
 }
 
-void List::removeFirst() 
-{
-	if (head != 0) {
-		Node* oldHead = head;
-		head = head->getNext();
-		delete oldHead;
-	}
-}
-
-void List::listLogs(int max_day, int min_day)
+void List::listLogs(int max_day, int min_day, int year, int month)
 {
 	Node* aux = head;
-	int check;
+	int check_day;
 
   	while (aux != 0)
 	{
-		check = aux->getDay();
-		if (check < max_day && check > min_day)
+		if (aux->getYear() == year)
 		{
-			List::printLog(aux);
+			if(aux->getMonth() == month)
+			{
+				check_day = aux->getDay();
+				if (check_day <= max_day && check_day >= min_day)
+				{
+					List::printLog(aux);
+				}
+				aux = aux->getNext();
+			}
 		}
-     	aux = aux->getNext();
   	}
 }
 
@@ -66,35 +63,34 @@ void List::printLog(Node* aux)
 	<< " Event: " << aux->getEvent() << endl;
 }
 
-float List::displayTotalTime() 
+void List::displayTotalTime() 
 {
   	Node* aux = head;
 
-	float hour = 0;
-	float last_hour = 0;
-	float total_hour = 0;
+	int hour = 0;
+	int last_hour = 0;
+	int total_hour = 0;
 
-	while (aux != 0){
-		if (aux->getEvent() == 'a')
+	while (aux != 0)
+	{
+		if ((aux->getEvent()) == 'b')
 		{
-			hour = aux->getHour();
-			hour += (aux->getMin())/60;
-			hour += (aux->getSec())/3600;
+			hour = (aux->getHour())*3600 + (aux->getMin())*60 + (aux->getSec());
+			aux = aux->getNext();
 
-			while (aux->getEvent() != 'b')
+			if(aux != 0)
 			{
-				aux = aux->getNext();
+				last_hour = (aux->getHour())*3600 + (aux->getMin())*60 + (aux->getSec());
 			}
-
-			last_hour = aux->getHour();
-			last_hour += (aux->getMin())/60;
-			last_hour += (aux->getSec())/3600;
-			
-			total_hour += hour - last_hour;
+			else
+				last_hour = 0;	
 		}
-
+		total_hour += last_hour - hour;
 		aux = aux->getNext();
 	}
 
-	return total_hour;
+	int printHour = total_hour/3600;
+	int printMinute = (total_hour % 3600)/60;
+
+	cout << "Tempo toral de uso: " << printHour << " horas e " << printMinute << " minutos" << endl; 
 }

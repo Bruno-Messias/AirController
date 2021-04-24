@@ -7,9 +7,8 @@ public:
     List();
     ~List();
     void insertAfterLast(int newYear, int newMonth, int newDay, int newHour, int newMin, int newSec, char newEvent);
-    void removeFirst();
     char* removeNode(char* dat);
-    void listLogs(int max_day, int min_day);
+    void listLogs(int max_day, int min_day, int year, int month);
     void printLog(Node *aux);
-    float displayTotalTime();
+    void displayTotalTime();
 };

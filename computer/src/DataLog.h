@@ -9,6 +9,9 @@ class DataLog {
     keyboard key;
     List lista;
     int serial_port;
+    /*Implementing timeout control for read logs*/
+    struct timeval timeout;
+
 public:
     bool flag;
 
@@ -20,4 +23,5 @@ public:
     void displayMenu();
     void interruptFunction();
     void totalTime();
+    void listAll();
 };
