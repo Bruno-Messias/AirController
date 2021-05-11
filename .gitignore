@@ -47,6 +47,8 @@ embedded/Air_AVR/.vs/Air_AVR/v14/.atsuo
 embedded/Air_AVR/Debug/Makefile
 computer/src/DataLog.h
 computer/.vscode/settings.json
+*.pdsbak
+*.workspace
 computer/computer
 *.bat
 *.gradle
