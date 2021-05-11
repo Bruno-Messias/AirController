@@ -2,6 +2,7 @@ package com.example.hello_cmake
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
@@ -10,7 +11,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Example of a call to a native method
-        findViewById<TextView>(R.id.sample_text).text = stringFromJNI()
+        findViewById<TextView>(R.id.textView).text = stringFromJNI()
+
+        val buttontime = findViewById<Button>(R.id.button2)
+        val buttonlog = findViewById<Button>(R.id.button3)
     }
 
     /**
