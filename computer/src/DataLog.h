@@ -23,5 +23,4 @@ public:
     void displayMenu();
     void interruptFunction();
     void totalTime();
-    void listAll();
 };
