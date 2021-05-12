@@ -15,6 +15,16 @@ class MainActivity : AppCompatActivity() {
 
         val buttontime = findViewById<Button>(R.id.button2)
         val buttonlog = findViewById<Button>(R.id.button3)
+        val resultsview = findViewById<TextView>(R.id.textView3)
+
+        buttontime.setOnClickListener {
+            /**
+            Whats happend when click
+             */
+        }
+        buttonlog.setOnClickListener {
+
+        }
     }
 
     /**
