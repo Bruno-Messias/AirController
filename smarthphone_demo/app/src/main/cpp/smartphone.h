@@ -17,3 +17,4 @@ public:
 };
 
 #endif //HELLO_CMAKE_SMARTPHONE_H
+

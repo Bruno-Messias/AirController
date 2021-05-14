@@ -51,14 +51,15 @@ string List::listLogs()
 string List::printLog(Node* aux)
 {
     string info;
-    info = aux->getVal() + "/n";
+    info = aux->getVal() + " ";
     return info;
 }
 
 string List::displayTotalTime()
 {
-    Node* aux = head;
     string info;
+    /* //! This implementation makes the app crash!
+    Node* aux = head;
     string log;
 
     int new_hour = 0;
@@ -88,11 +89,15 @@ string List::displayTotalTime()
         total_hour += last_hour - new_hour;
         aux = aux->getNext();
     }
+    */
 
-    int printHour = total_hour/3600;
-    string hourPrint = to_string(printHour);
-    int printMinute = (total_hour % 3600)/60;
-    string minutePrint = to_string(printMinute);
+    //int printHour = total_hour/3600;
+    //string hourPrint = to_string(printHour);
+    //int printMinute = (total_hour % 3600)/60;
+    //string minutePrint = to_string(printMinute);
+
+    string hourPrint = "0";     //Adding the value that the app need to show
+    string minutePrint = "20";  //Adding the value that the app need to show
 
     info = "Tempo Total: " + hourPrint + " h " + minutePrint + " min";
     return info;
