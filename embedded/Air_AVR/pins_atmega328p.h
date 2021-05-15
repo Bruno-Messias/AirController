@@ -5,8 +5,8 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#define F_CPU 1000000 // frequency oscillator for Simulation
-//#define F_CPU 16000000
+//#define F_CPU 1000000 // frequency oscillator for Simulation
+#define F_CPU 16000000
 
 #include <util/delay.h>
 
